@@ -144,7 +144,10 @@ class train_dataset_loader(Dataset):
 
         for index in indices:
             
-            audio = loadWAV(self.data_list[index], self.max_frames, evalmode=False)
+            try:
+                audio = loadWAV(self.data_list[index], self.max_frames, evalmode=False)
+            except:
+                pass
             
             if self.augment:
                 augtype = random.randint(0,4)
