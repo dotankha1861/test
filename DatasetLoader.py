@@ -146,21 +146,21 @@ class train_dataset_loader(Dataset):
             
             try:
                 audio = loadWAV(self.data_list[index], self.max_frames, evalmode=False)
+
+                if self.augment:
+                    augtype = random.randint(0,4)
+                    if augtype == 1:
+                        audio   = self.augment_wav.reverberate(audio)
+                    elif augtype == 2:
+                        audio   = self.augment_wav.additive_noise('music',audio)
+                    elif augtype == 3:
+                        audio   = self.augment_wav.additive_noise('speech',audio)
+                    elif augtype == 4:
+                        audio   = self.augment_wav.additive_noise('noise',audio)
+                    
+                feat.append(audio);
             except:
                 pass
-            
-            if self.augment:
-                augtype = random.randint(0,4)
-                if augtype == 1:
-                    audio   = self.augment_wav.reverberate(audio)
-                elif augtype == 2:
-                    audio   = self.augment_wav.additive_noise('music',audio)
-                elif augtype == 3:
-                    audio   = self.augment_wav.additive_noise('speech',audio)
-                elif augtype == 4:
-                    audio   = self.augment_wav.additive_noise('noise',audio)
-                    
-            feat.append(audio);
 
         feat = numpy.concatenate(feat, axis=0)
 
