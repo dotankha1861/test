@@ -27,8 +27,8 @@ def tuneThresholdfromScore(scores, labels, target_fa, target_fr = None):
     
     idxE = numpy.nanargmin(numpy.absolute((fnr - fpr)))
     eer  = max(fpr[idxE],fnr[idxE])*100
-    
-    return (tunedThreshold, eer, fpr, fnr);
+    decision_threshold = decision_threshold[idxE]
+    return (tunedThreshold, eer, decision_threshold, fpr, fnr);
 
 # Creates a list of false-negative rates, a list of false-positive rates
 # and a list of decision thresholds that give those error-rates.

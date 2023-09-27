@@ -233,7 +233,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
                 eers.append(result[1])
 
-                print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "Epoch {:d}, VEER {:2.4f}, MinDCF {:2.5f}".format(it, result[1], mindcf))
+                print('\n',time.strftime("%Y-%m-%d %H:%M:%S"), "Epoch {:d}, VEER {:2.4f}, MinDCF {:2.5f} decision threshold: {:1.5}".format(it, result[1], mindcf, result[2]))
                 scorefile.write("Epoch {:d}, VEER {:2.4f}, MinDCF {:2.5f}\n".format(it, result[1], mindcf))
 
                 trainer.saveParameters(args.model_save_path+"/model%09d.model"%it)
