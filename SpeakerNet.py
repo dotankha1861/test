@@ -6,6 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy, sys, random
 import time, itertools, importlib
+from sklearn.metrics.pairwise import cosine_similarity
 
 from DatasetLoader import test_dataset_loader
 from torch.cuda.amp import autocast, GradScaler
@@ -215,9 +216,14 @@ class ModelTrainer(object):
                     ref_feat = F.normalize(ref_feat, p=2, dim=1)
                     com_feat = F.normalize(com_feat, p=2, dim=1)
 
-                dist = torch.cdist(ref_feat.reshape(num_eval, -1), com_feat.reshape(num_eval, -1)).detach().cpu().numpy()
+                # dist = torch.cdist(ref_feat.reshape(num_eval, -1), com_feat.reshape(num_eval, -1)).detach().cpu().numpy()
 
-                score = -1 * numpy.mean(dist)
+                # score = -1 * numpy.mean(dist)
+                similarity = cosine_similarity(ref_feat.cpu().numpy(), com_feat.cpu().numpy())
+
+                # Điểm tương đồng là giá trị cosine similarity, có thể đảo ngược nếu cần
+                score = similarity[0, 0]  # Lấy giá trị cosine similarity
+
 
                 all_scores.append(score)
                 all_labels.append(int(data[0]))
