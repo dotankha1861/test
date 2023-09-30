@@ -48,8 +48,8 @@ parser.add_argument('--weight_decay',   type=float, default=0,      help='Weight
 ## Loss functions
 parser.add_argument("--hard_prob",      type=float, default=0.5,    help='Hard negative mining probability, otherwise random, only for some loss functions')
 parser.add_argument("--hard_rank",      type=int,   default=10,     help='Hard negative mining rank in the batch, only for some loss functions')
-parser.add_argument('--margin',         type=float, default=0.1,    help='Loss margin, only for some loss functions')
-parser.add_argument('--scale',          type=float, default=30,     help='Loss scale, only for some loss functions')
+parser.add_argument('--margin',         type=float, default=0.3,    help='Loss margin, only for some loss functions')
+parser.add_argument('--scale',          type=float, default=15,     help='Loss scale, only for some loss functions')
 parser.add_argument('--nPerSpeaker',    type=int,   default=1,      help='Number of utterances per speaker per batch, only for metric learning based losses')
 parser.add_argument('--nClasses',       type=int,   default=880,   help='Number of speakers in the softmax layer, only for softmax-based losses')
 
