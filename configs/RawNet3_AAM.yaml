@@ -3,7 +3,7 @@ encoder_type: ECA
 nOut: 256
 sinc_stride: 10
 max_frames: 200
-batch_size: 64
+batch_size: 128
 eval_frames: 400
 trainfunc: aamsoftmax
 lr_decay: 0.75
